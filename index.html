@@ -21,6 +21,9 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
 
+        <!-- Moment.js Reference -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
     </head>
     <body>
         <div class="container">
@@ -86,7 +89,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Trainform"> First Train Time: </label>
-                            <input type="text" class="form-control train-input" id="time" />
+                            <input type="text" class="form-control time-input" id="time" />
                         </div>
                         <div>
                             <label for="Trainform"> Frequency: </label>
@@ -97,6 +100,6 @@
                 <button class="btn btn-primary" id="add-train-btn">Submit</button>
             </div>
         </div>
-        <script src="app.js"></script>
+        <script src="./app.js"></script>
     </body>
 </html>
