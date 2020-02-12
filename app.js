@@ -13,13 +13,15 @@ $(document).ready(function() {
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
+    
     // Initializing var to ref the database
     var database = firebase.database();
 	
     $("#add-train-btn").on("click", function(event){
         event.preventDefault();
         
+        $("tbody").empty();
+
         // grabs inputs from form
         var trainName = $(".train-input").val().trim();
         var trainTo = $(".to-input").val().trim();
@@ -55,6 +57,7 @@ $(document).ready(function() {
         var nextTrain = moment(nextTrainMath).format("hh:mm");
         console.log("arrival time: " + nextTrain); //for ftp
 
+        var rando = 0;
         // created local temp copy of newTrain object
         var newTrain = {
             train: trainName,
@@ -85,33 +88,32 @@ $(document).ready(function() {
             console.log(childSnapshot.val());
             
             // store the database values back into the vars
-            var trainName = childSnapshot.val().train;
-            var trainTo = childSnapshot.val().to;
-            var trainFrom = childSnapshot.val().from;
-            var trainFreq = childSnapshot.val().freq;
-            var minsAway = childSnapshot.val().min;
-            var nextTrain = childSnapshot.val().time;
+            var newTrain = childSnapshot.val().train;
+            var newTo = childSnapshot.val().to;
+            var newFrom = childSnapshot.val().from;
+            var newFreq = childSnapshot.val().freq;
+            var newAway = childSnapshot.val().min;
+            var newNext = childSnapshot.val().time;
             
             // Console log for FTP only
-            console.log(trainName);
-            console.log(trainTo);
-            console.log(trainFrom);
-            console.log(trainFreq);
+            console.log(newTrain);
+            console.log(newTo);
+            console.log(newFrom);
+            console.log(newFreq);
+            console.log(newAway);
             console.log(trainTime);
-            console.log(minsAway);
-            console.log(nextTrain);
+            console.log(newNext);
             
             // create new row and append database pull
             var newRow = $("<tr>").append(
-                $("<td>").text(moment(nextTrain).format("hh:mm")),
-                $("<td>").text(trainName),
-                $("<td>").text(trainTo),
-                $("<td>").text(trainFrom),
-                $("<td>").text(trainFreq),
-                $("<td>").text(minsAway),
+                $("<td>").text(newNext),
+                $("<td>").text(newTrain),
+                $("<td>").text(newTo),
+                $("<td>").text(newFrom),
+                $("<td>").text(newFreq),
+                $("<td>").text(newAway),
             );
             
-            $("tbody").empty();
             // append new row to table
             $("tbody").append(newRow);
         });
